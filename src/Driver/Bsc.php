@@ -17,7 +17,7 @@ use UnionPay\Lib\AccessToken;
 use UnionPay\Config\Config;
 
 
-class Scan implements IData {
+class Bsc implements IData {
 
     private static $instance;
 

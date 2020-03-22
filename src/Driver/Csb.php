@@ -17,7 +17,7 @@ use UnionPay\Lib\PayHttp;
 use UnionPay\Config\Config;
 
 
-class Ali implements IData
+class Csb implements IData
 {
 
     protected static $instance;
