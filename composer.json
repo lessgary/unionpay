@@ -1,0 +1,21 @@
+{
+    "name": "trois/unionpay",
+    "description": "unionpay",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "wandehua",
+            "email": "271920545@qq.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {
+        "php":">=5.6"
+    },
+    "autoload": {
+        "psr-4": {
+            "UnionPay\\": "src"
+        }
+    }
+}
