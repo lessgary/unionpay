@@ -28,6 +28,7 @@ class Pay {
         if(!self::$instance) {
 
             if($option['type']=='callback'){
+                
 //                $str = file_get_contents('php://input');
 //                parse_str($str, $back_data);
 //                $back_data['billPayment'] = json_decode($back_data['billPayment'] ,true);
