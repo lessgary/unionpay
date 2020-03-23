@@ -231,8 +231,8 @@ class Csb implements IData
                 $res = self::$resHandler->getParameter();
                 unset($res['msgType'], $res['msgSrc'], $res['tid'], $res['billNo'], $res['billQRCode'], $res['instMid']);
                 $res['out_trade_no'] = $post['out_trade_no'];
-                $res['thirdPartyBuyerId'] = $res['billPayment']['buyerId'] ? $res['billPayment']['buyerId'] : $res['billPayment']['paySeqId']; //支付宝有可以没有buyerId
-                $res['total_fee'] = $res['billPayment']['totalAmount'];
+                $res['thirdPartyBuyerId'] = isset($res['billPayment'])?($res['billPayment']['buyerId'] ? $res['billPayment']['buyerId'] : $res['billPayment']['paySeqId']):''; //支付宝有可以没有buyerId
+                $res['total_fee'] = isset($res['billPayment'])?$res['billPayment']['totalAmount']:0;
                 $res['mch_id'] = $res['mid'];
                 $res['out_transaction_id'] = $post['out_trade_no'];
                 $res['trade_type'] = 'pay.alipay.native';
