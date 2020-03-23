@@ -27,7 +27,7 @@ class AccessToken {
         $parameter['appKey'] = $cfg->getAttr('key');
         $parameter['signature'] = self::signature($parameter);
         $pay->setReqContent($cfg->getAttr('access_token_url'), $parameter);
-        $pay->setDebug();
+//        $pay->setDebug();
 
         if(!$pay->call()){
             return false;
