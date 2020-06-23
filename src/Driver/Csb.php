@@ -287,6 +287,7 @@ class Csb implements IData
 
         self::$reqHandler->setAttr('gateUrl', self::$cfg->getAttr('url'));
         self::$reqHandler->setAttr('key', self::$cfg->getAttr('key'));
+        self::$reqHandler->setAttr('md5key', $post['md5Key']);
 
 //        file_put_contents('pay/'.time().'-get.txt',json_encode(self::$reqHandler->getParameter()));
 //        file_put_contents('pay/'.time().'-token.txt',json_encode(self::$resHandler->checkSign(self::$reqHandler)));

@@ -38,7 +38,7 @@ class Pay {
 //                }else{
 //                    if(strpos($back_data['billPayment']['targetSys'],'WXPay') !==false){
                         //$class = 'UnionPay\\Driver\\Wechat';
-                        $class = 'UnionPay\\Driver\\Ali';
+                        $class = 'UnionPay\\Driver\\Csb';
 //                    }else if(strpos($back_data['billPayment']['targetSys'],'Alipay') !==false){
 //                        $class = 'UnionPay\\Driver\\Ali';
 //                    }
@@ -47,7 +47,16 @@ class Pay {
             } else if($option['type']=='callback2'){
                 $class = 'UnionPay\\Driver\\H5';
             }else{
-                $class = 'UnionPay\\Driver\\'.ucwords(strtolower($option['type']));
+                $type = ucwords(strtolower($option['type']));
+                if ($type == 'Ali' || $type == 'Wechat') {
+                    $type = 'Csb';
+                }
+
+                if ($type == 'Scan') {
+                    $type = 'Bsc';
+                }
+
+                $class = 'UnionPay\\Driver\\' . $type;
             }
 
             try {

@@ -219,6 +219,7 @@ class H5 implements IData
         self::$reqHandler->setParameter('msgSrc',$post['msgSrc']);
 
         self::$reqHandler->setAttr('key',self::$cfg->getAttr('key'));
+        self::$reqHandler->setAttr('md5key', $post['md5Key']);
 
         if (self::$resHandler->checkSign(self::$reqHandler)) {
             if (self::$resHandler->getParameter('status')== 'TRADE_SUCCESS') {
