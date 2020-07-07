@@ -83,6 +83,7 @@ class Bsc implements IData {
         self::$cfg->setAttr('notify_url',$post['notifyUrl']);
         self::$cfg->setAttr('return_url',$post['returnUrl']);
         self::$cfg->setAttr('seller_url',$post['sellerUrl']);
+        self::$cfg->setAttr('access_token_url', $post['accessTokenUrl']);
 
         self::$reqHandler->setAttr('gateUrl',self::$cfg->getAttr('scan_url'));
         self::$reqHandler->setAttr('key',self::$cfg->getAttr('key'));
@@ -142,6 +143,7 @@ class Bsc implements IData {
         self::$cfg->setAttr('key',$post['key']);
         self::$cfg->setAttr('tid',$post['tid']);
         self::$cfg->setAttr('appId',$post['appid']);
+        self::$cfg->setAttr('access_token_url', $post['accessTokenUrl']);
 
         $access_token = self::$token->getToken(self::$reqHandler, self::$pay, self::$cfg, $post);
 

@@ -50,14 +50,18 @@ class AccessToken {
             return false;
         }
 
-        self::$access_token = Utils::make()->get_cache($cfg->getAttr('appId'));
-
-        //前1分钟就失效
-        if( !self::$access_token || time() > (self::$access_token['expires'] - 60) ){
-            self::build($req, $pay,  $cfg);
-        }
-
+        self::build($req, $pay,  $cfg);
         return self::$access_token['accessToken'];
+
+
+//        self::$access_token = Utils::make()->get_cache($cfg->getAttr('appId'));
+//
+//        //前1分钟就失效
+//        if( !self::$access_token || time() > (self::$access_token['expires'] - 60) ){
+//            self::build($req, $pay,  $cfg);
+//        }
+//
+//        return self::$access_token['accessToken'];
 
     }
 

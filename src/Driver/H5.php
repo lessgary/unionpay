@@ -127,6 +127,7 @@ class H5 implements IData
         self::$cfg->setAttr('key', $post['key']);
         self::$cfg->setAttr('tid', $post['tid']);
         self::$cfg->setAttr('appId', $post['appid']);
+        self::$cfg->setAttr('access_token_url', $post['accessTokenUrl']);
 
         self::$reqHandler->setAttr('gateUrl', self::$cfg->getAttr('h5_query_url'));
         self::$reqHandler->setAttr('key', self::$cfg->getAttr('key'));
@@ -213,6 +214,7 @@ class H5 implements IData
         self::$cfg->setAttr('mid',$post['mid']);
         self::$cfg->setAttr('key',$post['key']);
         self::$cfg->setAttr('tid',$post['tid']);
+        self::$cfg->setAttr('access_token_url', $post['accessTokenUrl']);
 
         self::$reqHandler->setParameter('signType',$post['signType']);
         self::$reqHandler->setParameter('msgSrcId',$post['msgSrcID']);
