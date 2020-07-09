@@ -22,10 +22,7 @@ class AccessToken {
 
         $parameter = [];
         $parameter['appId'] = $cfg->getAttr('appId');
-        $parameter['timestamp'] = date('YmdHis',time());
-        $parameter['nonce'] = $req->getNonceStr();
         $parameter['appKey'] = $cfg->getAttr('key');
-        $parameter['signature'] = self::signature($parameter);
         $pay->setReqContent($cfg->getAttr('access_token_url'), $parameter);
 //        $pay->setDebug();
 
@@ -35,10 +32,10 @@ class AccessToken {
 
         $res = $pay->getResContent();
 
-        self::$access_token['accessToken'] = $res['accessToken'];
-        self::$access_token['expires'] = time() + $res['expiresIn'];
+        self::$access_token['accessToken'] = $res['data'];
+//        self::$access_token['expires'] = time() + $res['expiresIn'];
 
-        Utils::make()->set_cache($parameter['appId'],self::$access_token);
+//        Utils::make()->set_cache($parameter['appId'],self::$access_token);
 
         return self::$access_token;
 

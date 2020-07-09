@@ -279,6 +279,7 @@ class Csb implements IData
         //$back_data['billPayment'] = json_decode($back_data['billPayment'] ,true);
 //       file_put_contents('pay/'.time().'-2231.txt',json_encode($back_data));
         self::$resHandler->setContent($back_data);
+        self::$cfg->setAttr('appId', $post['appid']);
         self::$cfg->setAttr('mid', $post['mid']);
         self::$cfg->setAttr('key', $post['key']);
         self::$cfg->setAttr('tid', $post['tid']);

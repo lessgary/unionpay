@@ -212,6 +212,7 @@ class H5 implements IData
 
         self::$resHandler->setContent($back_data);
         self::$cfg->setAttr('mid',$post['mid']);
+        self::$cfg->setAttr('appId', $post['appid']);
         self::$cfg->setAttr('key',$post['key']);
         self::$cfg->setAttr('tid',$post['tid']);
         self::$cfg->setAttr('access_token_url', $post['accessTokenUrl']);

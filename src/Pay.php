@@ -46,6 +46,8 @@ class Pay {
 
             } else if($option['type']=='callback2'){
                 $class = 'UnionPay\\Driver\\H5';
+            }else if($option['type']=='callback3') {
+                $class = 'UnionPay\\Driver\\Applet';
             }else{
                 $type = ucwords(strtolower($option['type']));
                 if ($type == 'Ali' || $type == 'Wechat') {
