@@ -88,20 +88,20 @@ class App implements IData
             'mid' => $post['mid'],
             'tid' => $post['tid'],
             'msgType' => $post['msgType'],
-            'msgId' => $post['msgId'],
             'msgSrc' => $post['msgSrc'],
             'instMid' => 'APPDEFAULT',
             'merOrderId' => $post['msgSrcID'] . $post['out_trade_no'],
             'signType' => self::$cfg->getAttr('sign_type'),
-            'totalAmount' => round($post['total_fee'], 0),
+            'totalAmount' => (int)round($post['total_fee'], 0),
             'tradeType' => 'APP',
             'requestTimestamp' => date('Y-m-d H:i:s'),
             'notifyUrl' => $post['notifyUrl'],
-            'returnUrl' => $post['returnUrl'],
         ];
-
-        $sendData['sign'] = self::$reqHandler->shaSign($content, $appKey);
-        $sendData = json_encode($sendData);
+        if ($content['msgType'] == 'wx.appPreOrder'){
+            $content['subAppId'] = self::$cfg->getAttr('sub_appId');
+        }
+        $content['sign'] = self::$reqHandler->shaSign($content, $appKey);
+        $sendData = json_encode($content);
         $res = self::$reqHandler->httpPost(self::$cfg->getAttr('app_url'), $sendData);
 
         $r = json_decode($res, true);
@@ -123,7 +123,7 @@ class App implements IData
     }
 
     //订单回调
-    public static function notifyurl($post)
+    public static function callback($post)
     {
         $data = $_REQUEST;
         //防攻击及日志记录
@@ -186,7 +186,7 @@ class App implements IData
             'requestTimestamp' => date('Y-m-d H:i:s', time()),
             'mid' => $post['mid'],
             'tid' => $post['tid'],
-            'merOrderId' => $post['tid'],
+            'merOrderId' => $post['merOrderId'],
             'signType' => self::$cfg->getAttr('sign_type'),
         ];
         $sendData['sign'] = self::$reqHandler->shaSign($sendData, $appKey);
@@ -210,35 +210,35 @@ class App implements IData
 
 
     //订单退款
-    public static function refundOrder($post)
-    {
-        $appKey = $post['key'];
-
-        $sendData = [
-            'msgSrc' => $post['msgSrc'],
-            'msgType' => 'refund',
-            'requestTimestamp' => date('Y-m-d H:i:s', time()),
-            'mid' => $post['mid'],
-            'tid' => $post['tid'],
-            'merOrderId' => $post['tid'],
-            'signType' => self::$cfg->getAttr('sign_type'),
-        ];
-        $sendData['sign'] = self::$reqHandler->shaSign($sendData, $appKey);
-        $sendData = json_encode($sendData);
-        $res = self::$reqHandler->httpPost(self::$cfg->getAttr('app_query_url'), $sendData);
-        $r = json_decode($res, true);
-        if ($r["errCode"] == 'SUCCESS') {
-            self::setSuccess(
-                [
-                    'status' => 'SUCCESS',
-                    'message' => '退款成功',
-                    'data' => $r,
-                ]
-            );
-            return true;
-        } else {
-            self::setError('NOTREFUND', '退款失败');
-            return false;
-        }
-    }
+//    public static function refundOrder($post)
+//    {
+//        $appKey = $post['key'];
+//
+//        $sendData = [
+//            'msgSrc' => $post['msgSrc'],
+//            'msgType' => 'refund',
+//            'requestTimestamp' => date('Y-m-d H:i:s', time()),
+//            'mid' => $post['mid'],
+//            'tid' => $post['tid'],
+//            'merOrderId' => $post['tid'],
+//            'signType' => self::$cfg->getAttr('sign_type'),
+//        ];
+//        $sendData['sign'] = self::$reqHandler->shaSign($sendData, $appKey);
+//        $sendData = json_encode($sendData);
+//        $res = self::$reqHandler->httpPost(self::$cfg->getAttr('app_query_url'), $sendData);
+//        $r = json_decode($res, true);
+//        if ($r["errCode"] == 'SUCCESS') {
+//            self::setSuccess(
+//                [
+//                    'status' => 'SUCCESS',
+//                    'message' => '退款成功',
+//                    'data' => $r,
+//                ]
+//            );
+//            return true;
+//        } else {
+//            self::setError('NOTREFUND', '退款失败');
+//            return false;
+//        }
+//    }
 }

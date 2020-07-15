@@ -23,6 +23,11 @@ class Config
 //        'h5_url'=>'http://58.247.0.18:29015/v1/netpay/webpay/pay',
         'h5_query_url' => 'https://api-mop.chinaums.com/v1/netpay/query',
 //        'h5_query_url'=>'http://58.247.0.18:29015/v1/netpay/query',
+//        'app_url' => 'https://qr-test2.chinaums.com/netpay-route-server/api/',//app下单测试地址
+//        'app_query_url' => 'https://qr-test2.chinaums.com/netpay-route-server/api/',//app查询/退款测试地址
+        'app_url' => 'https://qr.chinaums.com/netpay-route-server/api/',//app下单生产地址
+        'app_query_url' => 'https://qr.chinaums.com/netpay-route-server/api/',//app查询/退款生产地址
+        'sub_appId' => 'wx35e5bca52478dc47',//微信商户APPID
         'mid' => '',//商户号
         'key' => '',//密钥
         'tid' => '',//终端号
@@ -31,6 +36,8 @@ class Config
         'notify_url' => '',//异步回调通知地址
         'return_url' => '',//支付跳转地址
         'seller_url' => 'n',//二维码保存地址
+        'notifyurl_ip' => '',//回调IP
+        'sign_type' => 'SHA256'
     ];
 
     private function __construct()

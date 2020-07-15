@@ -13,6 +13,6 @@ Interface IData {
     public static function submit($post);
     public static function callback($post);
     public static function queryOrder($post);
-    public static function notifyurl($post);
-    public static function refundOrder($post);
+//    public static function notifyurl($post);
+//    public static function refundOrder($post);
 }
