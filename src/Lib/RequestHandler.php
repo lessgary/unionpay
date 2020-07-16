@@ -171,6 +171,110 @@ class RequestHandler {
         }
         return $str;
     }
+
+    /**
+     * sha256转签并加密
+     * @param $data
+     * @param $key
+     * @param string $connect
+     * @return string
+     */
+    public static function shaSign($data, $key, $connect = '')
+    {
+        ksort($data);
+        $string = '';
+        foreach ($data as $k => $vo) {
+            if ($vo !== '')
+                $string .= $k . '=' . $vo . '&';
+        }
+        $string = rtrim($string, '&');
+        $result = $string . $connect . $key;
+        $re = hash('sha256', $result, true);
+        return bin2hex($re);
+    }
+
+    /**
+     * curl post提交
+     * @param $getway
+     * @param $postData
+     * @return bool|string
+     */
+    public static function httpPost($getway, $postData)
+    {
+        try {
+            $ch = curl_init();
+            $header[] = "Content-Type:application/json";
+            curl_setopt($ch, CURLOPT_TIMEOUT, 20);
+            curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 20);
+            curl_setopt($ch, CURLOPT_HTTPHEADER, $header);
+            curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+            curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, false);
+            curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+            curl_setopt($ch, CURLOPT_POST, 1);
+            curl_setopt($ch, CURLOPT_URL, $getway);
+            curl_setopt($ch, CURLOPT_POSTFIELDS, $postData);
+            $contents = curl_exec($ch);
+            $errNo = curl_errno($ch);
+            $emsg = "";
+            if ($errNo > 0) {
+                $emsg = curl_error($ch);
+
+            }
+            curl_close($ch);
+            return $contents;
+        } catch (Exception $e) {
+        }
+        return "";
+    }
+
+    /**
+     *记录通道回调异步通知
+     */
+    public static function log_huitiao_notify($name, $backData)
+    {
+        $filePath = './Data/' . $name . '_notify/';
+        if (@mkdirs($filePath)) {
+            $destination = $filePath . date('y_m_d') . '.log';
+            if (!file_exists($destination)) {
+                @fopen($destination, 'wb ');
+            }
+            @file_put_contents($destination, "【" . date('Y-m-d H:i:s') . "】：\r\n" . var_export($backData, true) . "\r\n\r\n", FILE_APPEND);
+            return true;
+        }
+        return false;
+    }
+
+    /**
+     *递归创建多级目录
+     */
+    public static function mkdirs($dir, $mode = 0777)
+    {
+        if (is_dir($dir) || @mkdir($dir, $mode)) return TRUE;
+        if (!mkdirs(dirname($dir), $mode)) return FALSE;
+
+        return @mkdir($dir, $mode);
+    }
+
+    /**
+     * 获取用户ip
+     * @return mixed|string
+     */
+    public static function get_ip()
+    {
+        if (!empty($_SERVER['HTTP_CLIENT_IP'])) {
+            $cip = $_SERVER['HTTP_CLIENT_IP'];
+        } else if (!empty($_SERVER['HTTP_X_FORWARDED_FOR'])) {
+            $cip = $_SERVER["HTTP_X_FORWARDED_FOR"];
+        } else if (!empty($_SERVER["REMOTE_ADDR"])) {
+            $cip = $_SERVER["REMOTE_ADDR"];
+        } else {
+            $cip = '';
+        }
+        preg_match("/[\d\.]{7,15}/", $cip, $cips);
+        $cip = isset($cips[0]) ? $cips[0] : 'unknown';
+        unset($cips);
+        return $cip;
+    }
 }
 
 ?>
