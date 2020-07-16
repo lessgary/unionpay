@@ -123,7 +123,7 @@ class App implements IData
     }
 
     //订单回调
-    public static function notifyurl($post)
+    public static function callback($post)
     {
         $data = $_REQUEST;
         //防攻击及日志记录

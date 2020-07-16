@@ -28,22 +28,7 @@ class Pay {
         if(!self::$instance) {
 
             if($option['type']=='callback'){
-
-//                $str = file_get_contents('php://input');
-//                parse_str($str, $back_data);
-//                $back_data['billPayment'] = json_decode($back_data['billPayment'] ,true);
-//
-//                if(!isset($back_data['billPayment']['targetSys'])){
-//                    throw new Exception('参数交易类型为空');
-//                }else{
-//                    if(strpos($back_data['billPayment']['targetSys'],'WXPay') !==false){
-                        //$class = 'UnionPay\\Driver\\Wechat';
-                        $class = 'UnionPay\\Driver\\Csb';
-//                    }else if(strpos($back_data['billPayment']['targetSys'],'Alipay') !==false){
-//                        $class = 'UnionPay\\Driver\\Ali';
-//                    }
-//                }
-
+                $class = 'UnionPay\\Driver\\Csb';
             } else if($option['type']=='callback2'){
                 $class = 'UnionPay\\Driver\\H5';
             }else if($option['type']=='callback3') {
