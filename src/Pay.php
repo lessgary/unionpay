@@ -27,30 +27,14 @@ class Pay {
 
         if(!self::$instance) {
 
-            if($option['type']=='callback'){
-                $class = 'UnionPay\\Driver\\Csb';
-            } else if($option['type']=='callback2'){
-                $class = 'UnionPay\\Driver\\H5';
-            }else if($option['type']=='callback3') {
-                $class = 'UnionPay\\Driver\\Applet';
-            }else{
-                $type = ucwords(strtolower($option['type']));
-                if ($type == 'Ali' || $type == 'Wechat') {
-                    $type = 'Csb';
-                }
+            $type = ucwords(strtolower($option['type']));
 
-                if ($type == 'Scan') {
-                    $type = 'Bsc';
-                }
-
-                $class = 'UnionPay\\Driver\\' . $type;
-            }
+            $class = 'UnionPay\\Driver\\' . $type;
 
             try {
                 self::$instance = $class::make();
             } catch (Exception $e) {
-                echo $e->getMessage();
-                exit;
+                throw new Exception($e->getMessage());
             }
         }
         return self::$instance;
