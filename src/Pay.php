@@ -28,6 +28,13 @@ class Pay {
         if(!self::$instance) {
 
             $type = ucwords(strtolower($option['type']));
+            if ($type == 'Ali' || $type == 'Wechat') {
+                $type = 'Csb';
+            }
+
+            if ($type == 'Scan') {
+                $type = 'Bsc';
+            }
 
             $class = 'UnionPay\\Driver\\' . $type;
 

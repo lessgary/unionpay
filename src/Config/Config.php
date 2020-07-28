@@ -25,6 +25,10 @@ class Config
 //        'h5_query_url'=>'http://58.247.0.18:29015/v1/netpay/query',
 //        'app_url' => 'https://qr-test2.chinaums.com/netpay-route-server/api/',//app下单测试地址
 //        'app_query_url' => 'https://qr-test2.chinaums.com/netpay-route-server/api/',//app查询/退款测试地址
+        'h50_url' => 'https://qr.chinaums.com/netpay-portal/webpay/pay.do', //h5支付宝地址
+//        'h50_url' => 'https://qr-test2.com/netpay-portal/webpay/pay.do',
+        'h50_query_url' => 'https://qr.chinaums.com/netpay-route-server/api/',//h5支付宝地址
+//        'h50_query_url'=>'https://qr-test2.chinaums.com/netpay-route-server/api/',
         'app_url' => 'https://qr.chinaums.com/netpay-route-server/api/',//app下单生产地址
         'app_query_url' => 'https://qr.chinaums.com/netpay-route-server/api/',//app查询/退款生产地址
         'sub_appId' => 'wx35e5bca52478dc47',//微信商户APPID
