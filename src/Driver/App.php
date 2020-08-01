@@ -106,7 +106,8 @@ class App implements IData
 
         $r = json_decode($res, true);
         if (empty($r))
-            exit(print_r($res)); //如果转换错误，原样输出返回
+            //exit(print_r($res)); //如果转换错误，原样输出返回
+            return false;
         if ($r["errCode"] == 'SUCCESS') {
             self::setSuccess(
                 [
