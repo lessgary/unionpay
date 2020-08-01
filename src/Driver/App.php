@@ -193,7 +193,7 @@ class App implements IData
         $sendData = json_encode($sendData);
         $res = self::$reqHandler->httpPost(self::$cfg->getAttr('app_query_url'), $sendData);
         $r = json_decode($res, true);
-        if ($r["errCode"] == 'SUCCESS') {
+        if ($r["targetStatus"] == 'SUCCESS') {
             self::setSuccess(
                 [
                     'status' => 'SUCCESS',
