@@ -147,7 +147,7 @@ class PayHttp {
 
         if(isset($res['errCode']) && $res['errCode'] !=='0000' && $res['errCode'] !=='00' && $res['errCode'] !=='SUCCESS'){
             self::$resContent = $res;
-            self::setErrInfo("请求错误 errCode=" . $res['errCode'] ."，errMsg=" . $res['errInfo'] .", 请联系管理员解决");
+            self::setErrInfo("请求错误 errCode=" . $res['errCode'] ."，errMsg=" . (isset($res['errInfo'])?$res['errInfo']:'') .", 请联系管理员解决");
             curl_close($ch);
             return false;
         }

@@ -222,7 +222,7 @@ class H50 implements IData
        // file_put_contents('pay/77before_h50-get'.time().'.txt',$before_sign);
         //file_put_contents('pay/'.time().'77before_h51-get.txt',$post['key'].':'.$post['signType']);
 
-        $sign = self::generateSign($params,$post['key'],$post['signType']);
+        $sign = self::generateSign($params,$post['md5Key'],$post['signType']);
         //file_put_contents('pay/'.time().'after_h50-get.txt',$sign);
         if ($sign==$before_sign) {
             if (self::$resHandler->getParameter('status')== 'TRADE_SUCCESS') {
