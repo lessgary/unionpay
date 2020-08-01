@@ -194,7 +194,7 @@ class App implements IData
         $sendData = json_encode($sendData);
         $res = self::$reqHandler->httpPost(self::$cfg->getAttr('app_query_url'), $sendData);
         $r = json_decode($res, true);
-        if ($r["targetStatus"] == 'SUCCESS') {
+        if (isset($r["targetStatus"]) && $r["targetStatus"] == 'SUCCESS') {
             self::setSuccess(
                 [
                     'status' => 'SUCCESS',
@@ -204,7 +204,7 @@ class App implements IData
             );
             return true;
         } else {
-            self::setError('NOTPAY', '订单未支付');
+            self::setError('NOTPAY', $r["errMsg"]);
             return false;
         }
     }
