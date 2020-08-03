@@ -111,7 +111,8 @@ class H5 implements IData
         $paramurl = self::$cfg->getAttr('h5_url') . '?' . $paramurl;
         self::setSuccess(
             [
-                'url' => $paramurl
+                'url' => $paramurl,
+                'out_trade_no' => $content['merOrderId'],
             ]
         );
         return true;

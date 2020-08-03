@@ -100,7 +100,8 @@ class H50 implements IData
         $paramurl = self::$cfg->getAttr('h50_url') . '?' . $paramurl;
         self::setSuccess(
             [
-                'url' => $paramurl
+                'url' => $paramurl,
+                'out_trade_no' => $content['merOrderId'],
             ]
         );
         return true;
